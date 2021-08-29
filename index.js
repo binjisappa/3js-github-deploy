@@ -4,12 +4,14 @@ import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module.js";
 const canvas = document.querySelector(".webgl");
 const scene = new THREE.Scene();
 
-const geometry = new THREE.BoxGeometry(1, 1, 1);
+const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 const material = new THREE.MeshBasicMaterial({
-  color: 0x00ff00,
+  color: 0xff6347,
+  wireframe: true,
 });
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+const torus = new THREE.Mesh(geometry, material);
+
+scene.add(torus);
 
 //boilerplate code
 
@@ -40,6 +42,11 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 function animate() {
   requestAnimationFrame(animate);
+
+  torus.rotation.x += 0.01;
+  torus.rotation.y += 0.005;
+  torus.rotation.z += 0.01;
+
   renderer.render(scene, camera);
 }
 
