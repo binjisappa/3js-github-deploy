@@ -1,4 +1,6 @@
-import * as THREE from "https://unpkg.com/three@0.132.2/build/three.module.js";
+import { OrbitControls } from "https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module.js";
+
 const canvas = document.querySelector(".webgl");
 const scene = new THREE.Scene();
 
@@ -22,6 +24,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
+
 camera.position.set(0, 1, 2);
 scene.add(camera);
 
@@ -32,6 +35,8 @@ const renderer = new THREE.WebGL1Renderer({
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
+
+const controls = new OrbitControls(camera, renderer.domElement);
 
 function animate() {
   requestAnimationFrame(animate);
